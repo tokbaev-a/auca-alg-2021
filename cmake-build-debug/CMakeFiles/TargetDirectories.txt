@@ -1,0 +1,2 @@
+C:/Users/Arsen4ik/CLionProjects/auca-alg-2021/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Arsen4ik/CLionProjects/auca-alg-2021/cmake-build-debug/CMakeFiles/rebuild_cache.dir
