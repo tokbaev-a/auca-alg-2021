@@ -11,6 +11,7 @@ struct Node
     Node(int data, Node *prev, Node *next)
         : mData(data), mPrev(prev), mNext(next)
     {
+
     }
 };
 
