@@ -5779,8 +5779,7 @@ namespace {
 
 #define DOCTEST_DEBUG_OUTPUT_REPORTER_OVERRIDE(func, type, arg)                                    \
     void func(type arg) override {                                                                 \
-        bool with_col = g_no_colors;                     
-                                          \
+        bool with_col = g_no_colors;                                                               \
         g_no_colors   = false;                                                                     \
         ConsoleReporter::func(arg);                                                                \
         DOCTEST_OUTPUT_DEBUG_STRING(oss.str().c_str());                                            \
