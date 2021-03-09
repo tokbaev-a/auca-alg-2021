@@ -45,5 +45,17 @@ int main()
             cout << "bucket's index: " << hash(word) % setOfWords.bucket_count() << "\n";
             cout << (setOfWords.erase(word) ? "YES" : "NO") << "\n";
         }
+        else if (cmd == "#")
+        {
+            for (size_t i = 0; i < setOfWords.bucket_count(); ++i)
+            {
+                cout << setw(4) << i << ":";
+                for (auto p = setOfWords.begin(i); p != setOfWords.end(i); ++p)
+                {
+                    cout << " " << *p;
+                }
+                cout << "\n";
+            }
+        }
     }
 }
