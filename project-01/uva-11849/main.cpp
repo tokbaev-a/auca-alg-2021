@@ -16,6 +16,6 @@ int main()
             v.insert(x);
         }
 
-        cout << (m + n - (int)v.size());
+        cout << (m + n - (int)v.size()) << "\n";
     }
 }
