@@ -7,15 +7,15 @@
 template <typename T>
 class List
 {
-
     struct Node
     {
-        Node *mPrev;
-        Node *mNext;
         T mData;
 
+        Node *mPrev;
+        Node *mNext;
+
         Node(const T &data, Node *prev, Node *next)
-            : mPrev(prev), mNext(next), mData(data)
+            : mData(data), mPrev(prev), mNext(next)
         {
         }
     };
@@ -25,58 +25,37 @@ class List
 
 public:
     List()
-        : mHead(new Node(T(), nullptr, nullptr)), mSize(0)
+        : mHead(new Node(T(), nullptr, nullptr)),
+          mSize(0)
     {
         mHead->mNext = mHead;
         mHead->mPrev = mHead;
     }
 
-    List(const List<T> &other)
-        : mHead(new Node(T(), nullptr, nullptr)), mSize(0)
+    //copy contructor
+    List(const List &other)
+        : mHead(new Node(T(), nullptr, nullptr)),
+          mSize(0)
     {
         mHead->mNext = mHead;
         mHead->mPrev = mHead;
 
-        for (auto i = other.begin(); i != other.end(); i++)
+        for (auto p = other.begin(); p != other.end(); p++)
         {
-            pushBack(*i);
+            pushBack(*p);
         }
     }
 
-    List(List<T> &&other)
-        : mHead(other.mHead), mSize(other.mSize)
+    //move contructor
+    List(List &&other)
+        : mHead(new Node(T(), nullptr, nullptr)),
+          mSize(0)
     {
-        other.mHead = nullptr;
-        other.mSize = 0;
-    }
+        mHead->mNext = mHead;
+        mHead->mPrev = mHead;
 
-    List &operator=(const List<T> &other)
-    {
-        if (this != &other)
-        {
-            clear();
-
-            for (auto i = other.begin(); i != other.end(); i++)
-            {
-                pushBack(*i);
-            }
-        }
-        return *this;
-    }
-
-    List &operator=(List<T> &&other)
-    {
-        if (this != &other)
-        {
-            clear();
-            mHead = other.mHead;
-            mSize = other.mSize;
-
-            other.mHead = nullptr;
-            other.mSize = 0;
-        }
-
-        return *this;
+        std::swap(mHead, other.mHead);
+        std::swap(mSize, other.mSize);
     }
 
     ~List()
@@ -84,6 +63,36 @@ public:
         clear();
 
         delete mHead;
+    }
+
+    //  assignment operator
+    List &operator=(const List &other)
+    {
+        if (this == &other)
+        {
+            return *this;
+        }
+
+        while (other.mHead->mNext != other.mHead)
+        {
+            Node *p = other.mHead->mNext;
+            insert(end(), p->mData);
+            other.mHead->mNext = p->mNext;
+        }
+        return *this;
+    }
+
+    //  move assignment operator
+    List &operator=(List &&other)
+    {
+        if (this == &other)
+        {
+            return *this;
+        }
+        std::swap(mHead, other.mHead);
+        std::swap(mSize, other.mSize);
+
+        return *this;
     }
 
     void clear()
@@ -104,7 +113,6 @@ public:
         std::ostringstream out;
 
         out << "{";
-
         Node *p = mHead->mNext;
         for (std::size_t i = 0; i < mSize; i++)
         {
@@ -112,11 +120,9 @@ public:
             {
                 out << ", ";
             }
-
             out << p->mData;
             p = p->mNext;
         }
-
         out << "}";
 
         return out.str();
@@ -127,7 +133,6 @@ public:
         std::ostringstream out;
 
         out << "{";
-
         Node *p = mHead->mPrev;
         for (std::size_t i = 0; i < mSize; i++)
         {
@@ -135,38 +140,52 @@ public:
             {
                 out << ", ";
             }
-
             out << p->mData;
             p = p->mPrev;
         }
-
         out << "}";
 
         return out.str();
     }
 
-    void pushBack(const T &data)
+    void pushBack(const T &x)
     {
-        insert(end(), data);
+        // Node *t = new Node(x, mHead, mHead);
+        // mHead->mPrev->mNext = t;
+        // mHead->mPrev = t;
+        // mSize++;
+
+        insert(end(), x);
     }
 
-    T popBack()
+    void popBack()
     {
-        T t = *(--end());
-        erase(--end());
-        return t;
+        Node *t = mHead->mPrev;
+        mHead->mPrev->mPrev->mNext = mHead;
+        mHead->mPrev = mHead->mPrev->mPrev;
+
+        delete t;
+        mSize--;
     }
 
-    void pushFront(const T &data)
+    void pushFront(const T &x)
     {
-        insert(begin(), data);
+        // Node *t = new Node(x, mHead, mHead->mNext);
+        // mHead->mNext->mPrev = t;
+        // mHead->mNext = t;
+        // mSize++;
+
+        insert(begin(), x);
     }
 
-    T popFront()
+    void popFront()
     {
-        T t = *begin();
-        erase(begin());
-        return t;
+        Node *t = mHead->mNext;
+        mHead->mNext->mNext->mPrev = mHead;
+        mHead->mNext = mHead->mNext->mNext;
+
+        delete t;
+        mSize--;
     }
 
     class Iter;
@@ -185,13 +204,28 @@ public:
         return r;
     }
 
+    class RIter;
+
+    RIter rbegin()
+    {
+        RIter r;
+        r.mPtr = mHead->mPrev;
+        return r;
+    }
+
+    RIter rend()
+    {
+        RIter r;
+        r.mPtr = mHead;
+        return r;
+    }
+
     Iter insert(Iter p, const T &x)
     {
         Iter t;
         t.mPtr = new Node(x, p.mPtr->mPrev, p.mPtr);
         p.mPtr->mPrev = t.mPtr;
         t.mPtr->mPrev->mNext = t.mPtr;
-
         ++mSize;
 
         return t;
@@ -205,25 +239,8 @@ public:
         p.mPtr->mPrev->mNext = p.mPtr->mNext;
         p.mPtr->mNext->mPrev = p.mPtr->mPrev;
         delete p.mPtr;
+        mSize--;
 
-        --mSize;
-
-        return r;
-    }
-
-    class RIter;
-
-    RIter rbegin() const
-    {
-        RIter r;
-        r.mPtr = mHead->mPrev;
-        return r;
-    }
-
-    RIter rend() const
-    {
-        RIter r;
-        r.mPtr = mHead;
         return r;
     }
 };
@@ -291,6 +308,23 @@ public:
     {
         return !(*this == other);
     }
+
+    // Iter &operator=(const Iter &other)
+    // {
+    //     if (this == &other)
+    //     {
+    //         return *this;
+    //     }
+    //     else
+    //     {
+    //         clear();
+    //         for (auto p = other.begin(); p != other.end(); p++)
+    //         {
+    //             pushBack(*p);
+    //         }
+    //     }
+    //     return *this;
+    // }
 };
 
 template <typename T>

@@ -5,18 +5,18 @@ using namespace std;
 
 void printInDirectOrder(List<int> &v)
 {
-    for (auto i = v.begin(); i != v.end(); i++)
+    for (auto p = v.begin(); p != v.end(); p++)
     {
-        cout << *i << " ";
+        cout << " " << *p;
     }
     cout << "\n";
 }
 
-void printInReverseOrder(List<int> &v)
+void printInReversedOrder(List<int> &v)
 {
-    for (auto i = v.rbegin(); i != v.rend(); i++)
+    for (auto p = v.rbegin(); p != v.rend(); p++)
     {
-        cout << *i << " ";
+        cout << " " << *p;
     }
     cout << "\n";
 }
@@ -25,37 +25,36 @@ int main()
 {
     List<int> v;
 
-    for (int x; cin >> x;)
+    for (int i; cin >> i;)
     {
-        v.pushBack(x);
+        v.pushBack(i);
     }
 
     printInDirectOrder(v);
-    printInReverseOrder(v);
+    printInReversedOrder(v);
 
-    for (auto i = v.begin(); i != v.end(); i++)
+    for (auto p = v.begin(); p != v.end(); p++)
     {
-        if (*i % 2 == 0)
+        if (*p % 2 == 0)
         {
-            v.insert(i, 0);
+            v.insert(p, 0);
         }
     }
-
     printInDirectOrder(v);
-    printInReverseOrder(v);
+    printInReversedOrder(v);
 
-    for (auto i = v.begin(); i != v.end();)
+    for (auto p = v.begin(); p != v.end();)
     {
-        if (*i % 2 == 0)
+        if (*p % 2 == 0)
         {
-            i = v.erase(i);
+            p = v.erase(p);
         }
         else
         {
-            i++;
+            p++;
         }
     }
 
     printInDirectOrder(v);
-    printInReverseOrder(v);
+    printInReversedOrder(v);
 }
