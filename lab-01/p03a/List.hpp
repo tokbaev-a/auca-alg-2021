@@ -7,7 +7,6 @@
 template <typename T>
 class List
 {
-
     struct Node
     {
         Node *mPrev;

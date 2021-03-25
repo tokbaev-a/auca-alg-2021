@@ -5,9 +5,15 @@ using namespace std;
 
 void printInDirectOrder(const list<int> &v)
 {
-    for(auto e : v)
+    // for(auto e : v)
+    // {
+    //     cout << " " << e;
+    // }
+    // cout << endl;
+
+    for(auto i = v.begin(); i != v.end(); ++i)
     {
-        cout << " " << e;
+        cout << " " << *i;
     }
     cout << endl;
 }
