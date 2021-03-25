@@ -51,15 +51,10 @@ TEST_CASE("List move constructor")
     REQUIRE(v.size() == 3);
     REQUIRE(v.toStr() == "{1, 2, 3}");
 
-    // List<int> j = std::move(v);
+    List<int> j = std::move(v);
 
-    // REQUIRE(j.size() == 3);
-    // REQUIRE(j.toStr() == "{1, 2, 3}");
-
-    // REQUIRE(v.size() == 0);
-    // REQUIRE(v.toStr() == "{}");
-    // REQUIRE(j.size() == 3);
-    // REQUIRE(j.toStr() == "{1, 2, 3}");
+    REQUIRE(j.size() == 3);
+    REQUIRE(j.toStr() == "{1, 2, 3}");
 }
 
 TEST_CASE("Copy assignment operator")
@@ -103,16 +98,11 @@ TEST_CASE("Move assignment operator")
     REQUIRE(v.size() == 3);
     REQUIRE(v.toStr() == "{1, 2, 3}");
 
-    // List<int> j;
-    // j = std::move(v);
+    List<int> j;
+    j = std::move(v);
 
-    // REQUIRE(j.size() == 3);
-    // REQUIRE(j.toStr() == "{1, 2, 3}");
-
-    // REQUIRE(v.size() == 0);
-    // REQUIRE(v.toStr() == "{}");
-    // REQUIRE(j.size() == 3);
-    // REQUIRE(j.toStr() == "{1, 2, 3}");
+    REQUIRE(j.size() == 3);
+    REQUIRE(j.toStr() == "{1, 2, 3}");
 }
 
 TEST_CASE("pushBack")

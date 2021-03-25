@@ -92,9 +92,12 @@ public:
 
     void clear()
     {
-        while (begin() != end())
+        if (mHead != nullptr && mTail != nullptr)
         {
-            erase(begin());
+            while (begin() != end())
+            {
+                erase(begin());
+            }
         }
     }
 
