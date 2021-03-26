@@ -95,7 +95,7 @@ public:
         return *this;
     }
 
-    void clear()
+    void clear() 
     {
         while (begin() != end())
         {
