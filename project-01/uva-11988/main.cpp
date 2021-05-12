@@ -6,7 +6,8 @@ using namespace std;
 
 int main()
 {
-    for (string in; getline(cin, in);)
+    for (string in; 
+    getline(cin, in);)
     {
         list<char> res;
         auto pos = res.end();
