@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-    unordered_map<string, int> dic
+    unordered_map<string, int> dic;
 
     int index = 1;
     string res, s1, s2, s3, s4, s5;
