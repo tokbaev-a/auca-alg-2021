@@ -4,10 +4,10 @@ using namespace std;
 
 int main()
 {
-    int t;
-    cin >> t;
+    int inp;
+    cin >> inp;
     int c = 0;
-    while (t--)
+    while (inp--)
     {
         if (c > 0)
         {
