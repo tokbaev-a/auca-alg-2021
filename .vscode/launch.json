@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
             "args": [],
-            "stopAtEntry": false,
+            "stopAtEntry": true,
             "cwd": "C:\\Users\\Arsen4ik\\gcc\\bin",
             "environment": [],
             "externalConsole": false,
