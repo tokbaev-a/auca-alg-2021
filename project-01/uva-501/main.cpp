@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-    int k
+    int k;
     scanf("%d", &k);
     int cc = 0;
     while (k--)
