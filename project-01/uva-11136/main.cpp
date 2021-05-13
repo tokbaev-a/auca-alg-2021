@@ -30,7 +30,6 @@ int main()
             bills.erase(max);
         }
 
-        // cout 
         cout << sum << "\n";
     }
 }
