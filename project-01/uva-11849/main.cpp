@@ -18,4 +18,5 @@ int main()
 
         cout << (m + n - (int)v.size()) << "\n";
     }
+    
 }
