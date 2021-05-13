@@ -45,6 +45,14 @@ int main()
 
         cin >> l >> r >> s;
 
+        initChocolates(lc, l);
+        initChocolates(rc, r);
+        initChocolates(sc, s);
+
+        int l1 = 0, l2 = 0;
+        int r1 = 0, r2 = 0;
+        int s1 = 0, s2 = 0;
+
         countChocolates(lc, rc, sc, l1, r2, s2);
         countChocolates(rc, lc, sc, r1, l2, s2);
         countChocolates(sc, lc, rc, s1, l2, r2);
