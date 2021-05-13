@@ -14,6 +14,13 @@ int main()
             int m;
             cin >> m;
 
+            while (m--)
+            {
+                int k;
+                cin >> k;
+                bills.insert(k);
+            }
+
             auto max = --bills.end();
             auto min = bills.begin();
 
@@ -23,6 +30,7 @@ int main()
             bills.erase(max);
         }
 
+        // cout 
         cout << sum << "\n";
     }
 }
