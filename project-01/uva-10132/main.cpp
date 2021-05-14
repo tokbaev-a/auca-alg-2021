@@ -34,6 +34,10 @@ int main()
                 mem[frag[i] + frag[j]]++;
                 mem[frag[j] + frag[i]]++;
             }
+        }
+
+        int num = 0;
+        string res;
 
         for (auto it = mem.begin(); it != mem.end(); it++)
         {
