@@ -49,7 +49,7 @@ int main()
     vector<Status> colors(nVertices, Status::notVisited);
 
     int nComponent = 0;
-    for (size_t i = 0; i < nVertices; i++)
+    for (int i = 0; i < nVertices; i++)
     {
         if (colors[i] == Status::notVisited)
         {
