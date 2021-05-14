@@ -52,6 +52,11 @@ int main()
                     printf("DENIED\n");
                     ignored.insert(trid);
                 }
+                else if (s[item].count(trid) != s[item].size())
+                {
+                    printf("DENIED\n");
+                    ignored.insert(trid);
+                }
                 else
                 {
                     x[item] = trid;
