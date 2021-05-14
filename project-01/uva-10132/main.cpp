@@ -27,9 +27,9 @@ int main()
             frag.push_back(s);
         }
 
-        for (int i = 0; i < frag.size(); i++)
+        for (size_t i = 0; i < frag.size(); i++)
         {
-            for (int j = 0; j < frag.size(); j++)
+            for (size_t j = 0; j < frag.size(); j++)
             {
                 mem[frag[i] + frag[j]]++;
                 mem[frag[j] + frag[i]]++;
