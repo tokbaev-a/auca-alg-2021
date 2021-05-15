@@ -35,26 +35,6 @@ public:
         mSolution.resize(n);
     }
 
-    void solve(int col)
-    {
-        if (col == mN)
-        {
-            print();
-        }
-        else
-        {
-            for (int row = 0; row < mN; row++)
-            {
-                if (canPutQueen(row, col))
-                {
-                    putQueen(row, col);
-                    solve(col + 1);
-                    takeQueen(row, col);
-                }
-            }
-        }
-    }
-
     bool canPutQueen(int row, int col)
     {
         return !rows[row] && !diag1[row + col] && !diag2[col - row + mN - 1];
