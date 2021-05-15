@@ -7,13 +7,14 @@ using namespace std;
 class Solver
 {
     int mN;
+    int mCount;
     vector<bool> rows;
     vector<bool> diag1;
     vector<bool> diag2;
     vector<int> mSolution;
 
 public:
-    Solver(int n) : mN(n)
+    Solver(int n) : mN(n) , mCount(0)
     {
         if (n < 1)
         {
@@ -63,6 +64,7 @@ public:
 
     void print()
     {
+        cout << ++mCount << ":";
         for (auto e : mSolution)
         {
             cout << " " << e;
