@@ -7,14 +7,19 @@ using namespace std;
 
 int main()
 {
-    MapStrInt m;
+    MapStrInt d;
 
-    string w;
-    while (cin >> w)
+    string s;
+    while (cin >> s)
     {
-        ++m[w];
+        ++d[s];
     }
 
-    m.printInOrder(cout);
-    cout << "size: " << m.size() << endl;
+    d.printInOrder(cout);
+    cout << "size: " << d.size() << endl;
+
+    d.clear();
+    cout << "the size of empty map: " << d.size() << endl;
+
+    return 0;
 }
