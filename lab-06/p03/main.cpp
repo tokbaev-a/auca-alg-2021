@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const string kNil = "null";
+const string kNil = "no preds";
 
 enum class Status
 {
