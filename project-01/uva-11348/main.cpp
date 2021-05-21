@@ -26,7 +26,6 @@ int main()
                 res.first->second.insert(i);
             }
         }
-
         int counter = 0;
         vector<int> uniq(n, 0);
 
