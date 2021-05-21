@@ -8,7 +8,15 @@ int main()
     scanf("%d %d", &p, &g);
 
     unordered_map<string, int> map;
-    
+    while (p-- > 0)
+    {
+        string s;
+        int first_num, second_num;
+        char tmp_ch;
+        cin >> s >> first_num >> tmp_ch >> second_num;
+
+        map[s] = first_num * 10 + second_num;
+    }
     cin.ignore();
     string s;
     for (int i = 1; i <= g; i++)
