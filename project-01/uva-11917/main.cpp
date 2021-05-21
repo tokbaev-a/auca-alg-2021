@@ -6,38 +6,37 @@ int main()
 {
     int t;
     scanf("%d", &t);
-    for (int i = 1; i <= t; i++)
+    for (int c = 1; c <= t; c++)
     {
-        int sub;
-        scanf("%d", &sub);
-        unordered_map<string, int> map;
+        int subj;
+        unordered_map<string, int> homework;
+        scanf("%d", &subj);
 
-        for (int j = 0; j < sub; j++)
+        for (int i = 0; i < subj; i++)
         {
             string s;
             int d;
+
             cin >> s >> d;
-
-            map[s] = d;
+            homework[s] = d;
         }
-
-        int d1;
-        scanf("%d", &d1);
+        int D;
+        scanf("%d", &D);
 
         string s;
         cin >> s;
 
-        if (map.find(s) != map.end() && map[s] <= d1)
+        if (homework.find(s) != homework.end() && homework[s] <= D)
         {
-            printf("Case %d: Yesss\n", i);
+            printf("Case %d: Yesss\n", c);
         }
-        else if (map.find(s) != map.end() && map[s] > d1 && map[s] <= d1 + 5)
+        else if (homework.find(s) != homework.end() && homework[s] > D && homework[s] <= D + 5)
         {
-            printf("Case %d: Late\n", i);
+            printf("Case %d: Late\n", c);
         }
         else
         {
-            printf("Case %d: Do your own map!\n", i);
+            printf("Case %d: Do your own homework!\n", c);
         }
     }
 }
