@@ -15,6 +15,7 @@ int main()
         {
             break;
         }
+
         if (s1 == "1")
         {
             for (auto it = sheet.begin(); it != sheet.end(); it++)
@@ -38,7 +39,6 @@ int main()
             {
                 cout << e.first << " " << e.second << "\n";
             }
-
             sheet.clear();
             counter.clear();
         }
