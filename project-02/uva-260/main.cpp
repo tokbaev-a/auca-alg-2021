@@ -53,7 +53,13 @@ int main()
 
         vector<State> states(n * n);
         bool white_wins = false;
-
+        for (int i = 0; i < n; i++)
+        {
+            if (graph[i][0] == 'w' && states[i * n] == State::White)
+            {
+                dfs(i, 0, graph, states, white_wins);
+            }
+        }
         cout << test++ << " " << (white_wins ? "W" : "B") << "\n";
     }
 }
