@@ -39,6 +39,17 @@ int main()
             dominos[x].emplace(y);
         }
 
+        vector<int> states(n, 0);
+        int comps = 0;
+        for (int i = 0; i < l; i++)
+        {
+            int x;
+            cin >> x;
+            if (states[x - 1] == 0)
+            {
+                dfs(x - 1, dominos, states, comps);
+            }
+        }
 
         cout << comps << "\n";
     }
