@@ -1,55 +1,77 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <unordered_map>
+#include <sstream>
+#include <string>
+#include <vector>
+#include <cmath>
 
 using namespace std;
 
+bool isPunctuation(char c, vector<char> &punctuation)
+{
+    for (const auto &e : punctuation)
+    {
+        if (c == e)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+double entropy(int nWords, unordered_map<string, int> &m)
+{
+    double res = 0;
+    double lambda = log10(nWords);
+    for (const auto &e : m)
+    {
+        res += (lambda - log10(e.second)) * e.second;
+    }
+
+    return res / nWords;
+}
+
 int main()
 {
-    int t;
-    string s;
-
-    cin >> t;
-
-    cin.ignore();
-    getline(cin, s);
-
-    int c = 0;
-    while (t--)
+    vector<char> punctuation = {',', '.', ':', ';', '!', '?', '\"', '(', ')'};
+    string line;
+    while (getline(cin, line) && line != "****END_OF_INPUT****")
     {
-        if (c > 0)
-        {
-            printf("\n");
-        }
-        vector<string> frag;
-        map<string, int> mem;
+        unordered_map<string, int> m;
+        int nWords = 0;
 
-        while (getline(cin, s) && !s.empty())
+        while (line != "****END_OF_TEXT****")
         {
-            frag.push_back(s);
-        }
-
-        for (int i = 0; i < frag.size(); i++)
-        {
-            for (int j = 0; j < frag.size(); j++)
+            istringstream inp(line);
+            string word;
+            while (inp >> word)
             {
-                mem[frag[i] + frag[j]]++;
-                mem[frag[j] + frag[i]]++;
+                string t = "";
+                for (int i = 0; i < word.length(); ++i)
+                {
+                    if (!isPunctuation(word[i], punctuation))
+                    {
+                        t += tolower(word[i]);
+                    }
+                    else if (t != "")
+                    {
+                        ++nWords;
+                        ++m[t];
+                        t = "";
+                    }
+                }
+                if (t.length() != 0)
+                {
+                    ++nWords;
+                    ++m[t];
+                }
             }
+
+            getline(cin, line);
         }
+        double textEntropy = entropy(nWords, m);
+        double relEntropy = textEntropy / log10(nWords) * 100;
 
-        int num = 0;
-        string res;
-
-        for (auto it = mem.begin(); it != mem.end(); it++)
-        {
-            if (it->second > num)
-            {
-                num = it->second;
-                res = it->first;
-            }
-        }
-
-        cout << res << "\n";
-
-        c++;
+        printf("%d %.1f %.0f\n", nWords, textEntropy, relEntropy);
     }
 }
