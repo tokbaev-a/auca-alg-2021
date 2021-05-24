@@ -21,7 +21,7 @@ void calc(const vector<int> &v, int i, int res, bool &possibility)
 
 void shuffle(int i, vector<int> &v, vector<int> &c, vector<bool> &taken, bool &possibility)
 {
-    if (i == v.size())
+    if (i == (int)v.size())
     {
         if (possibility)
         {
@@ -30,7 +30,7 @@ void shuffle(int i, vector<int> &v, vector<int> &c, vector<bool> &taken, bool &p
         calc(c, 0, c[0], possibility);
         return;
     }
-    for (int j = 0; j < v.size(); j++)
+    for (int j = 0; j < (int)v.size(); j++)
     {
         if (!taken[j])
         {
